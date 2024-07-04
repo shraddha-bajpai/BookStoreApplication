@@ -1,0 +1,9 @@
+-- schema.sql
+
+CREATE TABLE IF NOT EXISTS book (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    author VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    isbn VARCHAR(20) NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
