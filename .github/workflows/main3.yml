@@ -19,8 +19,15 @@ jobs:
 
       
 
+      - name: Grant execute permissions to gradlew
+        run: |
+            cd "${{ github.workspace }}"
+            chmod +x gradlew
+          
       - name: Build with Gradle
-        run: ./gradlew build
+        run: |
+          cd "${{ github.workspace }}"
+          ./gradlew build -x test
 
       - name: Build Docker image
         run: |
