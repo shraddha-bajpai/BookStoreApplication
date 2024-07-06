@@ -48,10 +48,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN}}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/BookStoreApplication
-          file: Dockerfile
+      - name: Push Docker Image
+        env:
+          SERVICE_NAME: bookstore-application
+          VERSION: v1.0
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/bookstore-application:${VERSION} || exit 1
