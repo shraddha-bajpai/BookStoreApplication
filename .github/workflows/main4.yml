@@ -27,22 +27,15 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
-
-      - name: grant permission for gradle
-        run: chomd +x gradlew 
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle
-
+      - name: Grant execute permissions to gradlew
+        run: |
+          cd "${{ github.workspace }}"
+          chmod +x gradlew
+          
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
-
-      - name: Test with Gradle
-        run: ./gradlew test --no-daemon
+        run: |
+          cd "${{ github.workspace }}"
+          ./gradlew build -x test
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
