@@ -50,7 +50,8 @@ jobs:
 
       - name: Push Docker Image
         env:
-          SERVICE_NAME: bookstore-application
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           VERSION: v1.0
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/bookstore-application:${VERSION} || exit 1
+          docker push ${{ secrets.DOCKER_USERNAME }}/book:${VERSION} || exit 1
+
